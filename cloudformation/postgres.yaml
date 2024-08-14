@@ -1,0 +1,25 @@
+Resources:
+  ServerlessV2Cluster:
+    Type: 'AWS::RDS::DBCluster'
+    DeletionPolicy: Delete
+    Properties:
+      Engine: aurora-postgresql
+      MasterUsername: postgresadmin
+      MasterUserPassword: DB123rds
+      ServerlessV2ScalingConfiguration:
+        MinCapacity: 0.5
+        MaxCapacity: 2
+
+  ServerlessV2Instance1:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      DBClusterIdentifier: !Ref ServerlessV2Cluster
+      DBInstanceClass: db.serverless
+      Engine: aurora-postgresql
+
+  ServerlessV2Instance2:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      DBClusterIdentifier: !Ref ServerlessV2Cluster
+      DBInstanceClass: db.serverless
+      Engine: aurora-postgresql
